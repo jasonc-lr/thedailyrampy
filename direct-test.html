@@ -6,7 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1.0" />
     <title>The Daily Rampy | Direct Test</title>
 
-    Validating ATS Direct
+    
     <script async defer src="https://ats-wrapper.privacymanager.io/ats-modules/d9e0200a-7c46-45aa-8059-a7259b6344c6/ats.js"></script>
 
 
@@ -30,14 +30,10 @@
         </div>
     </nav>
 
-    <button onclick="fetchAtsDirectSegments()" class="btn waves-effect waves-light" type="submit" name="action">Fetch Segments
-        <i class="material-icons right">cloud</i>
-    </button>
-
     <div class="section no-pad-bot" id="index-banner">
         <div class="container">
             <br><br>
-            <h1 class="header center orange-text">Learn how to become addressable.</h1>
+            <h1 class="header center orange-text">Validating ATS Direct</h1>
             <div class="row center">
                 <h5 class="header col s12 light">Sign up and view more of our (mock) articles</h5>
             </div>
@@ -59,6 +55,12 @@
                         </div>
                     </div>
                 </form>
+            </div>
+
+            <div class="row">
+                <button onclick="fetchAtsDirectSegments()" class="btn waves-effect waves-light" type="submit" name="action">Fetch Segments
+                    <i class="material-icons right">cloud</i>
+                </button>
             </div>
 
         </div>
@@ -130,15 +132,20 @@
         });
 
 
+
         async function fetchAtsDirectSegments(){
 
+            let segments;
+
             try {
-                const segments = await ats.getSegmentsData();
+                segments = await ats.getSegmentsData();
                 console.log("We got response:", segments);
                 alert("Segments from appliance: " + JSON.stringify(segments));
             }catch (e) {
                 console.error("Failed to fetch ATS Direct segment: ", e)
             }
+
+            return segments;
 
         }
     </script>
