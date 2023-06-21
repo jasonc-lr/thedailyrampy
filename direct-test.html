@@ -30,6 +30,10 @@
         </div>
     </nav>
 
+    <button onclick="fetchAtsDirectSegments()" class="btn waves-effect waves-light" type="submit" name="action">Fetch Segments
+        <i class="material-icons right">cloud</i>
+    </button>
+
     <div class="section no-pad-bot" id="index-banner">
         <div class="container">
             <br><br>
@@ -124,6 +128,19 @@
 
 
         });
+
+
+        async function fetchAtsDirectSegments(){
+
+            try {
+                const segments = await ats.getSegmentsData();
+                console.log("We got response:", segments);
+                alert("Segments from appliance: " + JSON.stringify(segments));
+            }catch (e) {
+                console.error("Failed to fetch ATS Direct segment: ", e)
+            }
+
+        }
     </script>
 
 </body>
