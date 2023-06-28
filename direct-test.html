@@ -6,8 +6,25 @@
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1.0" />
     <title>The Daily Rampy | Direct Test</title>
 
-    
-    <script async defer src="https://ats-wrapper.privacymanager.io/ats-modules/d9e0200a-7c46-45aa-8059-a7259b6344c6/ats.js"></script>
+
+    <!-- GPT for testing direct -->
+    <script async src="https://securepubads.g.doubleclick.net/tag/js/gpt.js"></script>
+    <!-- <script src="https://securepubads.g.doubleclick.net/tag/js/gpt.js"></script> -->
+    <script>
+
+        // Sets up a command bridge so we can push commands to it so 
+        // when GTM loads, we can run those commands.
+        window.googletag = window.googletag || { cmd: [] };
+        googletag.cmd.push(function () {
+            googletag.defineSlot('/22794602900/Nicktest', [300, 250], 'div-gpt-ad-1687939319417-0').addService(googletag.pubads());
+            googletag.pubads().enableSingleRequest();
+            googletag.pubads().setTargeting('atsd', []); // TODO: set targeting data for keys?
+            googletag.enableServices();
+        });
+    </script>
+
+    <script async defer
+        src="https://ats-wrapper.privacymanager.io/ats-modules/d9e0200a-7c46-45aa-8059-a7259b6344c6/ats.js"></script>
 
 
     <!-- CSS  -->
@@ -38,6 +55,19 @@
                 <h5 class="header col s12 light">Sign up and view more of our (mock) articles</h5>
             </div>
             <br><br>
+
+            <!-- /22794602900/Nicktest ad unit -->
+            
+            <div id='div-gpt-ad-1687939319417-0'
+                style='min-width: 300px; min-height: 250px; border: 3px solid black; background-color: aqua;'>
+                <h3>Test Ad area</h3>
+                <script>
+                    googletag.cmd.push(function () {
+                        console.log("Loading test ad for nick..")
+                        googletag.display('div-gpt-ad-1687939319417-0');
+                    });
+                </script>
+            </div>
             <div class="row">
                 <form id="direct-form" class="col s12">
                     <div class="row">
@@ -58,7 +88,8 @@
             </div>
 
             <div class="row">
-                <button onclick="fetchAtsDirectSegments()" class="btn waves-effect waves-light" type="submit" name="action">Fetch Segments
+                <button onclick="fetchAtsDirectSegments()" class="btn waves-effect waves-light" type="submit"
+                    name="action">Fetch Segments
                     <i class="material-icons right">cloud</i>
                 </button>
             </div>
@@ -133,7 +164,7 @@
 
 
 
-        async function fetchAtsDirectSegments(){
+        async function fetchAtsDirectSegments() {
 
             let segments;
 
@@ -141,7 +172,7 @@
                 segments = await ats.getSegmentsData();
                 console.log("We got response:", segments);
                 alert("Segments from appliance: " + JSON.stringify(segments));
-            }catch (e) {
+            } catch (e) {
                 console.error("Failed to fetch ATS Direct segment: ", e)
             }
 
