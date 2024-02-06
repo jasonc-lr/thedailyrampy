@@ -231,13 +231,11 @@
             var email = document.getElementById("email");
             form.addEventListener('submit', doSubmit)
 
-
             function doSubmit(e) {
                 console.log("submitting form...canceling propogation:", e)
                 console.log("Email captured is:", email.value);
                 e.preventDefault();
             }
-
 
         });
     </script>

@@ -1,2 +1,2 @@
 # thedailyrampy
-A (fake) news site.
+A (very real, news DIRECT to you..) news site.

@@ -4,27 +4,36 @@
 <head>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1.0" />
-    <title>The Daily Rampy | Direct Test</title>
+    <title>The Daily Rampy | RewardedVid Test</title>
 
-    <!-- GPT for testing direct -->
+    <!-- <script async src="https://securepubads.g.doubleclick.net/tag/js/gpt.js"></script>
+    <script>
+        window.googletag = window.googletag || { cmd: [] };
+        googletag.cmd.push(function () {
+            googletag.defineSlot('/22794602900/did-rewarded-interstitial', [320, 480], 'div-gpt-ad-1699314449317-0').setTargeting('ats_on_device', ['1234567890']).addService(googletag.pubads());
+            googletag.pubads().enableSingleRequest();
+            googletag.enableServices();
+        });
+    </script> -->
+
+
     <script async src="https://securepubads.g.doubleclick.net/tag/js/gpt.js"></script>
     <script>
         window.googletag = window.googletag || { cmd: [] };
         googletag.cmd.push(function () {
-            googletag.defineSlot('/22794602900/ats-direct-v2-demo', [300, 250], 'div-gpt-ad-1707245316974-0').addService(googletag.pubads());
+            googletag.defineSlot('/22794602900/Demo', [300, 600], 'div-gpt-ad-1699314904402-0').setTargeting('ats_on_device', ['1234567890']).addService(googletag.pubads());
             googletag.pubads().enableSingleRequest();
             googletag.enableServices();
         });
     </script>
 
-    <!-- thedailyrampy -->
-    <script async defer src="https://launchpad-wrapper.privacymanager.io/8487cea7-be4b-4892-aa82-e36f0c4fd1ba/launchpad-liveramp.js">
-    </script>
 
     <!-- CSS  -->
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
     <link href="css/materialize.css" type="text/css" rel="stylesheet" media="screen,projection" />
     <link href="css/style.css" type="text/css" rel="stylesheet" media="screen,projection" />
+
+
 </head>
 
 <body>
@@ -44,36 +53,26 @@
     <div class="section no-pad-bot" id="index-banner">
         <div class="container">
             <br><br>
-            <h1 class="header center orange-text">Pardon our... (ATS)<i>direct</i>ness.</h1>
+            <h1 class="header center orange-text">Validating Basic Video Targeting</h1>
             <div class="row center">
                 <h5 class="header col s12 light">Sign up and view more of our (mock) articles</h5>
             </div>
             <br><br>
 
-            <!-- /22794602900/ats-direct-v2-demo -->
-            <div id='div-gpt-ad-1707245316974-0' style='min-width: 300px; min-height: 250px;'>
+            <!-- /22794602900/did-rewarded-interstitial -->
+            <!-- <div id='div-gpt-ad-1699314449317-0' style='min-width: 320px; min-height: 480px;'>
                 <script>
-                    googletag.cmd.push(function () { googletag.display('div-gpt-ad-1707245316974-0'); });
+                    googletag.cmd.push(function () { googletag.display('div-gpt-ad-1699314449317-0'); });
+                </script>
+            </div> -->
+
+            <!-- /22794602900/Demo -->
+            <div id='div-gpt-ad-1699314904402-0' style='min-width: 300px; min-height: 600px;'>
+                <script>
+                    googletag.cmd.push(function () { googletag.display('div-gpt-ad-1699314904402-0'); });
                 </script>
             </div>
-            <div class="row">
-                <form id="direct-form" class="col s12">
-                    <div class="row">
-                        <div class="input-field col s12">
-                            <input id="email" type="email" class="validate">
-                            <label for="email">Email</label>
-                        </div>
-                    </div>
-                    <div class="row">
-                        <div class="input-field col s12">
 
-                            <button class="btn waves-effect waves-light" type="submit" name="action">Submit
-                                <i class="material-icons right">send</i>
-                            </button>
-                        </div>
-                    </div>
-                </form>
-            </div>
 
         </div>
     </div>
@@ -126,24 +125,7 @@
     <script src="https://code.jquery.com/jquery-2.1.1.min.js"></script>
     <script src="js/materialize.js"></script>
     <script src="js/init.js"></script>
-    <script>
-        document.addEventListener('DOMContentLoaded', function () {
 
-            var form = document.getElementById("direct-form");
-            var email = document.getElementById("email");
-            form.addEventListener('submit', doSubmit)
-
-
-            function doSubmit(e) {
-                console.log("submitting form...canceling propogation:", e)
-                console.log("Email captured is:", email.value);
-                e.preventDefault();
-            }
-
-
-        });
-
-    </script>
 
 </body>
 
