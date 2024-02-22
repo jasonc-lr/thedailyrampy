@@ -10,11 +10,6 @@
     <script async src="https://securepubads.g.doubleclick.net/tag/js/gpt.js"></script>
     <script>
 
-
-        // Custom - attempt to overload liveramp targeting that refreshes the ad
-        window.googletag.pubads().refresh = () => console.log("[Test Override] Somebody tried to call refresh!?");
-        window.googletag.pubads().clearTargeting = () => console.log("[Test Override] Somebody tried to call clear my targeting!?");
-
         // Example function to get the targeting direct KVP before 1st ad request (when ATS has not yet loaded)
         function manual_getATSDirectTargeting() {
 
