@@ -9,13 +9,31 @@
     <!-- GPT for testing direct -->
     <script async src="https://securepubads.g.doubleclick.net/tag/js/gpt.js"></script>
     <script>
+        // Example function to get the targeting direct KVP before 1st ad request (when ATS has not yet loaded)
+        function manual_getATSDirectTargeting() {
+
+            var atsd_targeting = [];
+
+            if (document.cookie.indexOf("_lr_atsDirect") != -1) {
+                var tarr = document.cookie.split(";");
+                tarr = tarr.filter((a) => a.includes("_lr_atsDirect"))
+                try {
+                    atsd_targeting = JSON.parse(atob(tarr[0].split("=")[1])).envelope;
+                } catch (e) {
+                    // handle
+                }
+            }
+
+            return atsd_targeting;
+        }
+
 
         // Prepare google ad
         window.googletag = window.googletag || { cmd: [] };
         googletag.cmd.push(function () {
             googletag.defineSlot('/22794602900/ats-direct-v2-demo', [300, 250], 'div-gpt-ad-1707245316974-0').addService(googletag.pubads());
             googletag.pubads().enableSingleRequest();
-            googletag.pubads().setTargeting('atsd', []);
+            googletag.pubads().setTargeting('atsd', manual_getATSDirectTargeting());
             googletag.enableServices();
         });
     </script>
@@ -23,20 +41,21 @@
     <!-- thedailyrampy -->
 
     <link rel="preload" href="https://launchpad.privacymanager.io/latest/launchpad.bundle.js" as="script" />
-    <script async defer src="https://launchpad-wrapper.privacymanager.io/c6f54606-bc79-4c33-8e3b-8288c271c6ff/launchpad-liveramp.js"></script>
+    <script async defer
+        src="https://launchpad-wrapper.privacymanager.io/c6f54606-bc79-4c33-8e3b-8288c271c6ff/launchpad-liveramp.js"></script>
 
     <script>
         // Fire sample eCST event when the module is loaded.
         window.addEventListener("ecstModuleReady", async () => {
             console.log("eCST module is loaded");
 
-            __launchpad('ecst', { 
-                "my_event": 'page_viewed', 
+            __launchpad('ecst', {
+                "my_event": 'page_viewed',
                 "some_fluff": "oh_yes",
                 "sugar": "yes_please",
                 "yougotta": "put_itdown_on_me"
             });
-        
+
         });
     </script>
 
