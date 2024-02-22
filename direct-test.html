@@ -31,11 +31,16 @@
         // Prepare google ad
         window.googletag = window.googletag || { cmd: [] };
         googletag.cmd.push(function () {
-            googletag.defineSlot('/22794602900/ats-direct-v2-demo', [300, 250], 'div-gpt-ad-1707245316974-0').addService(googletag.pubads());
+            googletag.defineSlot('/22794602900/ats-direct-v2-demo', [300, 250], 'div-gpt-ad-1707245316974-0')
+                .addService(googletag.pubads());
             googletag.pubads().enableSingleRequest();
             googletag.pubads().setTargeting('atsd', manual_getATSDirectTargeting());
             googletag.enableServices();
         });
+
+
+        // Custom - attempt to overload liveramp targeting that refreshes the ad
+        googletag.pubads().refresh = () => console.log("Somebody tried to call refresh!");
     </script>
 
     <!-- thedailyrampy -->
