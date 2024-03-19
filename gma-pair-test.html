@@ -39,7 +39,8 @@
             console.log("envelopeModuleReady: setAdditionalData (hard coded hash)")
 
             ats.setAdditionalData({
-                emailHashes: "3e33f1163236952e4fe8ea00ead7b8a2e65a75b694a462b14ef6b71d1913d89f"
+                id: ["3e33f1163236952e4fe8ea00ead7b8a2e65a75b694a462b14ef6b71d1913d89f"],
+                type: 'emailHashes'
             });
         })
 
@@ -52,37 +53,37 @@
         });
 
         async function createPairIdCollector() {
-        let envelopeObject = await ats.retrieveEnvelope(null, "_lr_pairId"); // TODO
-        let pairId = ""; // Pending DV360 change to use only 1 pairID instead of multiple
+            let envelopeObject = await ats.retrieveEnvelope(null, "_lr_pairId"); // TODO
+            let pairId = ""; // Pending DV360 change to use only 1 pairID instead of multiple
 
-        // TODO: Short terminate if we don't have anything?
-        // Discussion: Would we prefer to send an empty signal, or nothing at all?
-        if (!envelopeObject) {
-            console.log("No _lr_pairId found in cookie/storage yet - refresh page.")
-            return;
-        }
-
-        // '{"timestamp":1710861040041,"version":"1.3.0","envelope":["A/tZZeV+ivm7XqLiWjHeK7PtNf+3N271eZS4rN44oYz2"]}'
-        try {
-            envelopeObject = JSON.parse(envelopeObject);
-            console.log(envelopeObject);
-            pairId = envelopeObject.envelope[0];
-            console.log(pairId);
-        } catch (e) {
-            // TODO: handle this
-        }
-
-        window.googletag = window.googletag || { cmd: [] };
-        window.googletag.secureSignalProviders = window.googletag.secureSignalProviders || [];
-
-        // Push collector function, but for Google's space -
-        window.googletag.secureSignalProviders.push({
-            id: 'google.com',
-            collectorFunction: () => {
-            console.log("Collector function fired with: ", pairId)
-            return Promise.resolve(pairId);
+            // TODO: Short terminate if we don't have anything?
+            // Discussion: Would we prefer to send an empty signal, or nothing at all?
+            if (!envelopeObject) {
+                console.log("No _lr_pairId found in cookie/storage yet - refresh page.")
+                return;
             }
-        });
+
+            // '{"timestamp":1710861040041,"version":"1.3.0","envelope":["A/tZZeV+ivm7XqLiWjHeK7PtNf+3N271eZS4rN44oYz2"]}'
+            try {
+                envelopeObject = JSON.parse(envelopeObject);
+                console.log(envelopeObject);
+                pairId = envelopeObject.envelope[0];
+                console.log(pairId);
+            } catch (e) {
+                // TODO: handle this
+            }
+
+            window.googletag = window.googletag || { cmd: [] };
+            window.googletag.secureSignalProviders = window.googletag.secureSignalProviders || [];
+
+            // Push collector function, but for Google's space -
+            window.googletag.secureSignalProviders.push({
+                id: 'google.com',
+                collectorFunction: () => {
+                    console.log("Collector function fired with: ", pairId)
+                    return Promise.resolve(pairId);
+                }
+            });
         }
 
     </script>
@@ -121,7 +122,8 @@
     </script>
 
     <!-- thedailyrampy - google sec signals test -->
-    <script async defer src="https://ats-wrapper.privacymanager.io/ats-modules/e8260c63-d395-421b-b131-c1245f4f9ac3/ats.js"></script>
+    <script async defer
+        src="https://ats-wrapper.privacymanager.io/ats-modules/e8260c63-d395-421b-b131-c1245f4f9ac3/ats.js"></script>
 
     <!-- CSS  -->
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
