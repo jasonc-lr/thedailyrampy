@@ -84,30 +84,18 @@
                     return Promise.resolve(pairId);
                 }
             });
+
+
+            function refreshFirstSlot() {
+                googletag.cmd.push(() => {
+                    googletag.pubads().refresh();
+                });
+            }
         }
 
     </script>
 
     <script>
-
-        // // Example function to get the targeting direct KVP before 1st ad request (when ATS has not yet loaded)
-        // function manual_getATSDirectTargeting() {
-
-        //     var atsd_targeting = [];
-
-        //     if (document.cookie.indexOf("_lr_atsDirect") != -1) {
-        //         var tarr = document.cookie.split(";");
-        //         tarr = tarr.filter((a) => a.includes("_lr_atsDirect"))
-        //         try {
-        //             atsd_targeting = JSON.parse(atob(tarr[0].split("=")[1])).envelope;
-        //         } catch (e) {
-        //             // handle
-        //         }
-        //     }
-
-        //     return atsd_targeting;
-        // }
-
 
         // Prepare google ad
         window.googletag = window.googletag || { cmd: [] };
@@ -148,7 +136,7 @@
     <div class="section no-pad-bot" id="index-banner">
         <div class="container">
             <br><br>
-            <h1 class="header center orange-text">Pardon our... (ATS)<i>direct</i>ness.</h1>
+            <h1 class="header center orange-text">Pardon our....</h1>
             <div class="row center">
                 <h5 class="header col s12 light">Sign up and view more of our (mock) articles</h5>
             </div>
@@ -243,7 +231,6 @@
                 console.log("Email captured is:", email.value);
                 e.preventDefault();
             }
-
 
         });
 
