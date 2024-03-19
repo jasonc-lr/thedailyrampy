@@ -52,7 +52,7 @@
         });
 
         async function createPairIdCollector() {
-        let envelopeObject = await ats.retrieveEnvelope("_lr_pairId"); // TODO
+        let envelopeObject = await ats.retrieveEnvelope(null, "_lr_pairId"); // TODO
         let pairId = ""; // Pending DV360 change to use only 1 pairID instead of multiple
 
         // TODO: Short terminate if we don't have anything?
