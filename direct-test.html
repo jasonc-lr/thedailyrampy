@@ -15,13 +15,26 @@
 
             var atsd_targeting = [];
 
+            // Attempt cookie targeting
             if (document.cookie.indexOf("_lr_atsDirect") != -1) {
                 var tarr = document.cookie.split(";");
                 tarr = tarr.filter((a) => a.includes("_lr_atsDirect"))
+                atsd_targeting = JSON.parse(atob(decodeURIComponent(tarr[0].split("=")[1]))).envelope.join(",");
                 try {
-                    atsd_targeting = JSON.parse(atob(tarr[0].split("=")[1])).envelope;
+                    atsd_targeting = JSON.parse(atob(tarr[0].split("=")[1])).envelope.join(",");
+                    console.log("First page load scenario: targeting ATSD with cookie", atsd_targeting);
                 } catch (e) {
-                    // handle
+                    console.error(e);
+                }
+            }
+
+            // Attempt local storage targeting
+            if (localStorage.getItem("_lr_atsDirect") != null) {
+                try {
+                    atsd_targeting = JSON.parse(atob(localStorage.getItem("_lr_atsDirect"))).envelope.join(",")
+                    console.log("First page load scenario: targeting ATSD with localstorage:", atsd_targeting);
+                } catch (e) {
+                    console.error(e);
                 }
             }
 
