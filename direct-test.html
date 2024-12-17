@@ -46,16 +46,58 @@
         googletag.cmd.push(function () {
             googletag.defineSlot('/22794602900/ats-direct-v2-demo', [300, 250], 'div-gpt-ad-1707245316974-0')
                 .addService(googletag.pubads());
+
+            setupGoogleListenerExample();
+
+
+
             googletag.pubads().enableSingleRequest();
             googletag.pubads().setTargeting('atsd', manual_getATSDirectTargeting());
             googletag.pubads().setTargeting('big_nonsense', "do not delete me!");
             googletag.enableServices();
+
+
+
         });
 
-        googletag.pubads().addEventListener("impressionViewable", (event) => {
-            const slot = event.slot;
-            console.log("[TEST] Google event for impressionViewable: ", slot.getSlotElementId(), "became viewable.");
-        });
+        function setupGoogleListenerExample() {
+            // This listener will be called when an impression is considered viewable.
+            googletag.pubads().addEventListener("impressionViewable", (event) => {
+                const slotId = event.slot.getSlotElementId();
+                printEventMessage("Impression has become viewable.", slotId);
+            });
+
+            // This listener will be called when a slot's creative iframe load event
+            // fires.
+            googletag.pubads().addEventListener("slotOnload", (event) => {
+                const slotId = event.slot.getSlotElementId();
+                printEventMessage("Creative iframe load event has fired.", slotId);
+            });
+
+            // This listener will be called when a slot has finished rendering.
+            googletag.pubads().addEventListener("slotRenderEnded", (event) => {
+                const slotId = event.slot.getSlotElementId();
+
+                // Record details of the rendered ad.
+                const details = {
+                    "Advertiser ID": event.advertiserId,
+                    "Campaign ID": event.campaignId,
+                    "Company IDs": event.companyIds,
+                    "Creative ID": event.creativeId,
+                    "Creative Template ID": event.creativeId,
+                    "Is backfill?": event.isBackfill,
+                    "Is empty?": event.isEmpty,
+                    "Line Item ID": event.lineItemId,
+                    Size: typeof event.size === "string" ? event.size : (event.size?.join("x") ?? null),
+                    "Slot content changed?": event.slotContentChanged,
+                    "Source Agnostic Creative ID": event.sourceAgnosticCreativeId,
+                    "Source Agnostic Line Item ID": event.sourceAgnosticLineItemId,
+                    "Yield Group IDs": event.yieldGroupIds,
+                };
+
+                printEventMessage("Slot has finished rendering.", slotId, details);
+            });
+        }
 
     </script>
 
