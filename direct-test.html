@@ -21,7 +21,6 @@
                 tarr = tarr.filter((a) => a.includes("_lr_atsDirect"))
                 atsd_targeting = JSON.parse(atob(decodeURIComponent(tarr[0].split("=")[1]))).envelope.join(",");
                 try {
-                    atsd_targeting = JSON.parse(atob(tarr[0].split("=")[1])).envelope.join(",");
                     console.log("First page load scenario: targeting ATSD with cookie", atsd_targeting);
                 } catch (e) {
                     console.error(e);
@@ -53,6 +52,11 @@
             googletag.enableServices();
         });
 
+        googletag.pubads().addEventListener("impressionViewable", (event) => {
+            const slot = event.slot;
+            console.log("[TEST] Google event for impressionViewable: ", slot.getSlotElementId(), "became viewable.");
+        });
+
     </script>
 
     <!-- thedailyrampy -->
@@ -63,17 +67,17 @@
 
     <script>
         // Fire sample eCST event when the module is loaded.
-        window.addEventListener("ecstModuleReady", async () => {
-            console.log("eCST module is loaded");
+        // window.addEventListener("ecstModuleReady", async () => {
+        //     console.log("eCST module is loaded");
 
-            __launchpad('ecst', {
-                "my_event": 'page_viewed',
-                "some_fluff": "oh_yes",
-                "sugar": "yes_please",
-                "yougotta": "put_itdown_on_me"
-            });
+        //     __launchpad('ecst', {
+        //         "my_event": 'page_viewed',
+        //         "some_fluff": "oh_yes",
+        //         "sugar": "yes_please",
+        //         "yougotta": "put_itdown_on_me"
+        //     });
 
-        });
+        // });
     </script>
 
     <!-- CSS  -->
