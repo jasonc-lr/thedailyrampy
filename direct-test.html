@@ -6,6 +6,9 @@
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1.0" />
     <title>The Daily Rampy | Direct Test</title>
 
+    <!-- A free CMP -->
+    <script type="text/javascript" charset="UTF-8" src="//cdn.cookie-script.com/s/17259e25747907483f26f992f55569ee.js"></script>
+
     <!-- GPT for testing direct -->
     <script async src="https://securepubads.g.doubleclick.net/tag/js/gpt.js"></script>
     <script>
@@ -49,29 +52,29 @@
 
             setupGoogleListenerExample();
 
-
-
             googletag.pubads().enableSingleRequest();
             googletag.pubads().setTargeting('atsd', manual_getATSDirectTargeting());
             googletag.pubads().setTargeting('big_nonsense', "do not delete me!");
             googletag.enableServices();
 
 
+            
+
 
         });
 
+        // https://developers.google.com/publisher-tag/samples/ad-event-listeners
         function setupGoogleListenerExample() {
             // This listener will be called when an impression is considered viewable.
             googletag.pubads().addEventListener("impressionViewable", (event) => {
                 const slotId = event.slot.getSlotElementId();
-                printEventMessage("Impression has become viewable.", slotId);
+                console.log("[SELF] Impression has become viewable.", slotId);
             });
 
             // This listener will be called when a slot's creative iframe load event
-            // fires.
             googletag.pubads().addEventListener("slotOnload", (event) => {
                 const slotId = event.slot.getSlotElementId();
-                printEventMessage("Creative iframe load event has fired.", slotId);
+                console.log("[SELF] Creative iframe load event has fired.", slotId);
             });
 
             // This listener will be called when a slot has finished rendering.
@@ -79,6 +82,7 @@
                 const slotId = event.slot.getSlotElementId();
 
                 // Record details of the rendered ad.
+                // Note - ATS.js / LP should also be firing something similar foif we have consent
                 const details = {
                     "Advertiser ID": event.advertiserId,
                     "Campaign ID": event.campaignId,
@@ -95,7 +99,9 @@
                     "Yield Group IDs": event.yieldGroupIds,
                 };
 
-                printEventMessage("Slot has finished rendering.", slotId, details);
+                console.log("[SELF] Slot has finished rendering.", slotId, details);
+                console.log("Here is where we should have fired the eCST..");
+
             });
         }
 
@@ -109,17 +115,17 @@
 
     <script>
         // Fire sample eCST event when the module is loaded.
-        // window.addEventListener("ecstModuleReady", async () => {
-        //     console.log("eCST module is loaded");
+        window.addEventListener("ecstModuleReady", async () => {
+            console.log("[Myself] eCST module is loaded!");
 
-        //     __launchpad('ecst', {
-        //         "my_event": 'page_viewed',
-        //         "some_fluff": "oh_yes",
-        //         "sugar": "yes_please",
-        //         "yougotta": "put_itdown_on_me"
-        //     });
+            __launchpad('ecst', {
+                "my_event": 'page_viewed',
+                "some_fluff": "oh_yes",
+                "sugar": "yes_please",
+                "yougotta": "put_itdown_on_me"
+            });
 
-        // });
+        });
     </script>
 
     <!-- CSS  -->
